@@ -1,4 +1,4 @@
-import { addValidators } from './form-validation.js';
+import { addValidators, isValidForm } from './form-validation.js';
 
 const newAdvertisementForm = document.querySelector('.ad-form');
 const filtersForm = document.querySelector('.map__filters');
@@ -27,7 +27,14 @@ const activateForms = () => {
   activateFormElements(newAdvertisementForm);
 };
 
+const onNewAdvertisementFormSubmit = (evt) => {
+  if (!isValidForm()) {
+    evt.preventDefault();
+  }
+};
+
 const initFormModule = () => {
+  newAdvertisementForm.addEventListener('submit', onNewAdvertisementFormSubmit);
   deactivateForms();
   activateForms();
   addValidators();
