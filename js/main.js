@@ -1,3 +1,3 @@
-import { createAdvertisementDataset } from './temp-data.js';
+import { renderAdvertisementCard } from './similar-advertisements.js';
 
-createAdvertisementDataset();
+renderAdvertisementCard();
