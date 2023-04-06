@@ -1,3 +1,5 @@
+import { addValidators } from './form-validation.js';
+
 const newAdvertisementForm = document.querySelector('.ad-form');
 const filtersForm = document.querySelector('.map__filters');
 
@@ -28,6 +30,7 @@ const activateForms = () => {
 const initFormModule = () => {
   deactivateForms();
   activateForms();
+  addValidators();
 };
 
 export { initFormModule };
