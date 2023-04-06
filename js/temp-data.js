@@ -17,7 +17,7 @@ const Types = [
   'palace',
   'flat',
   'house',
-  'bungalow ',
+  'bungalow',
   'hotel'
 ];
 
@@ -87,7 +87,7 @@ const createAdvertisementData = () => {
       checkin: Checkins[getRandomInteger(0, 2)],
       checkout: Checkouts[getRandomInteger(0, 2)],
       features: Features.slice(0, [getRandomInteger(1, 6)]),
-      description: Descriptions[getRandomInteger(1, 5)],
+      description: Descriptions[id - 1],
       photos: Photos.slice(0, [getRandomInteger(1, 3)])
     },
     location: locationData
