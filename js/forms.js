@@ -1,5 +1,5 @@
-import { addValidators, isValidForm } from './form-validation.js';
-import { initFormUserInputsModule } from './form-user-inputs.js';
+import { addValidators, isValidForm } from './new-adv-form-validation.js';
+import { initFormUserInputsModule } from './new-adv-form-user-inputs.js';
 
 const newAdvertisementForm = document.querySelector('.ad-form');
 const filtersForm = document.querySelector('.map__filters');
