@@ -29,7 +29,7 @@ const pristineSetup = new Pristine(newAdvertisementForm, {
 
 const checkTitleLength = (value) => checkStringMinLength(value, MIN_STRING_TITLE_LENGTH);
 
-const checkMinPrice = (value) => Number(value) >= MinPriceTypeValues[String(typeSelect.value).toUpperCase()];
+const checkMinPrice = (value) => Number(value) >= MinPriceTypeValues[typeSelect.value.toUpperCase()];
 
 const checkGuestsCount = (value) => {
   const numberValue = Number(value);
