@@ -1,7 +1,7 @@
 import { checkStringMinLength } from './utils.js';
 
 const titleSelect = document.querySelector('#title');
-const typeInput = document.querySelector('#type');
+const typeSelect = document.querySelector('#type');
 const priceInput = document.querySelector('#price');
 const roomsCountSelect = document.querySelector('#room_number');
 const guestsCountSelect = document.querySelector('#capacity');
@@ -29,7 +29,7 @@ const pristineSetup = new Pristine(newAdvertisementForm, {
 
 const checkTitleLength = (value) => checkStringMinLength(value, MIN_STRING_TITLE_LENGTH);
 
-const checkMinPrice = (value) => Number(value) >= MinPriceTypeValues[String(typeInput.value).toUpperCase()];
+const checkMinPrice = (value) => Number(value) >= MinPriceTypeValues[String(typeSelect.value).toUpperCase()];
 
 const checkGuestsCount = (value) => {
   const numberValue = Number(value);
