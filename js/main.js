@@ -1,5 +1,5 @@
 import { renderAdvertisementCard } from './similar-advertisements.js';
-import { initFormModule } from './forms.js';
+import { initFormsModule } from './forms.js';
 
 renderAdvertisementCard();
-initFormModule();
+initFormsModule();

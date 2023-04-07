@@ -1,4 +1,5 @@
 import { addValidators, isValidForm } from './form-validation.js';
+import { initFormUserInputsModule } from './form-user-inputs.js';
 
 const newAdvertisementForm = document.querySelector('.ad-form');
 const filtersForm = document.querySelector('.map__filters');
@@ -33,12 +34,13 @@ const onNewAdvertisementFormSubmit = (evt) => {
   }
 };
 
-const initFormModule = () => {
+const initFormsModule = () => {
   newAdvertisementForm.addEventListener('submit', onNewAdvertisementFormSubmit);
   deactivateForms();
   activateForms();
   addValidators();
+  initFormUserInputsModule();
 };
 
-export { initFormModule };
+export { initFormsModule };
 
