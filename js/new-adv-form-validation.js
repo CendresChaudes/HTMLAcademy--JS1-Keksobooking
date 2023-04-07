@@ -1,10 +1,8 @@
 import { checkStringMinLength } from './utils.js';
 
-const titleSelect = document.querySelector('#title');
-const typeSelect = document.querySelector('#type');
-const priceInput = document.querySelector('#price');
-const roomsCountSelect = document.querySelector('#room_number');
-const guestsCountSelect = document.querySelector('#capacity');
+const MIN_STRING_TITLE_LENGTH = 30;
+const MAX_ROOMS_COUNT_VALUE = 100;
+const NOT_FOR_GUESTS_VALUE = 0;
 
 const MinPriceTypeValues = {
   BUNGALOW: 0,
@@ -14,10 +12,11 @@ const MinPriceTypeValues = {
   PALACE: 10000
 };
 
-const MIN_STRING_TITLE_LENGTH = 30;
-const MAX_ROOMS_COUNT_VALUE = 100;
-const NOT_FOR_GUESTS_VALUE = 0;
-
+const titleSelect = document.querySelector('#title');
+const typeSelect = document.querySelector('#type');
+const priceInput = document.querySelector('#price');
+const roomsCountSelect = document.querySelector('#room_number');
+const guestsCountSelect = document.querySelector('#capacity');
 const newAdvertisementForm = document.querySelector('.ad-form');
 
 const pristineSetup = new Pristine(newAdvertisementForm, {
@@ -69,4 +68,3 @@ const addValidators = () => {
 const isValidForm = () => pristineSetup.validate();
 
 export { addValidators, isValidForm };
-
