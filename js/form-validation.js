@@ -25,7 +25,7 @@ const pristineSetup = new Pristine(newAdvertisementForm, {
   errorClass: 'ad-form__element--invalid',
   errorTextParent: 'ad-form__element',
   errorTextTag: 'p'
-});
+}, false);
 
 const checkTitleLength = (value) => checkStringMinLength(value, MIN_STRING_TITLE_LENGTH);
 
