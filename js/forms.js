@@ -42,5 +42,5 @@ const initFormsModule = () => {
   initFormUserInputsModule();
 };
 
-export { initFormsModule };
+export { initFormsModule, activateForms };
 
