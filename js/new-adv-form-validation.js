@@ -1,6 +1,6 @@
 import { checkStringMinLength } from './utils.js';
 
-const titleInput = document.querySelector('#title');
+const titleSelect = document.querySelector('#title');
 const typeInput = document.querySelector('#type');
 const priceInput = document.querySelector('#price');
 const roomsCountSelect = document.querySelector('#room_number');
@@ -47,7 +47,7 @@ const checkGuestsCount = (value) => {
 
 const addValidators = () => {
   pristineSetup.addValidator(
-    titleInput,
+    titleSelect,
     checkTitleLength,
     'Минимальная длина - 30 символов!'
   );
@@ -68,7 +68,5 @@ const addValidators = () => {
 
 const isValidForm = () => pristineSetup.validate();
 
-const resetPristine = () => pristineSetup.reset();
-
-export { addValidators, isValidForm, resetPristine };
+export { addValidators, isValidForm };
 
