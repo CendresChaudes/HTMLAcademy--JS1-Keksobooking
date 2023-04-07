@@ -37,7 +37,6 @@ const onNewAdvertisementFormSubmit = (evt) => {
 const initFormsModule = () => {
   newAdvertisementForm.addEventListener('submit', onNewAdvertisementFormSubmit);
   deactivateForms();
-  activateForms();
   addValidators();
   initFormUserInputsModule();
 };
