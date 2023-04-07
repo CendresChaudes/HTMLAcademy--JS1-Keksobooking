@@ -1,9 +1,4 @@
-import { createAdvertisementDataset } from './temp-data.js';
-
-const mapContainer = document.querySelector('#map-canvas');
-const advertisementCardTemplate = document.querySelector('#card').content;
-
-const advertisementDataset = createAdvertisementDataset();
+const advertisementCardTemplate = document.querySelector('#card').content.querySelector('.popup');
 
 const getTypeHousing = (type) => {
   switch (type) {
@@ -61,6 +56,4 @@ const createAdvertisementCard = ({author, offer}) => {
   return advertisementCard;
 };
 
-const renderAdvertisementCard = () => advertisementDataset.forEach((data) => mapContainer.append(createAdvertisementCard(data)));
-
-export { renderAdvertisementCard };
+export { createAdvertisementCard };
