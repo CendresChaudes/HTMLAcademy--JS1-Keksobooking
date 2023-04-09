@@ -56,10 +56,8 @@ const initSLider = () => {
 
   priceSlider.noUiSlider.on('update', () => {
     priceInput.value = priceSlider.noUiSlider.get();
-    if (priceInput.value === `${DefaultSliderValues.MIN}`) {
-      priceInput.value = '';
-    }
   });
+  priceInput.value = '';
 
   priceInput.addEventListener('change', onPriceInputChange);
 };
