@@ -25,8 +25,6 @@ const priceSlider = document.querySelector('.ad-form__slider');
 const addressInput = document.querySelector('#address');
 const typeSelect = document.querySelector('#type');
 const priceInput = document.querySelector('#price');
-const roomsCountSelect = document.querySelector('#room_number');
-const guestsCountSelect = document.querySelector('#capacity');
 const timeinSelect = document.querySelector('#timein');
 const timeoutSelect = document.querySelector('#timeout');
 
@@ -67,11 +65,7 @@ const resetSlider = () => {
   priceInput.value = '';
 };
 
-const defaultInputs = () => {
-  const selectedRoomsCountValue = roomsCountSelect.querySelector('[selected]').value;
-  guestsCountSelect.querySelector(`[value="${selectedRoomsCountValue}"]`).selected = 'selected';
-
-  priceInput.placeholder = MinPriceTypeValues[typeSelect.value.toUpperCase()];
+const resetAddressInput = () => {
   addressInput.defaultValue = `${MAP_DEFAULT_SETUP.lat.toFixed(COORDINATES_PRECISION)}, ${MAP_DEFAULT_SETUP.lng.toFixed(COORDINATES_PRECISION)}`;
 };
 
@@ -82,21 +76,21 @@ const onTypeSelectChange = (evt) => {
 };
 
 const onTimeinSelectChange = (evt) => {
-  timeoutSelect.querySelector(`[value="${evt.target.value}"]`).selected = 'selected';
+  timeoutSelect.value = evt.target.value;
 };
 
 const onTimeoutSelectChange = (evt) => {
-  timeinSelect.querySelector(`[value="${evt.target.value}"]`).selected = 'selected';
+  timeinSelect.value = evt.target.value;
 };
 
 const initFormUserInputsModule = () => {
-  defaultInputs();
   initSLider();
   resetSlider();
+  resetAddressInput();
 
   typeSelect.addEventListener('change', onTypeSelectChange);
   timeinSelect.addEventListener('change', onTimeinSelectChange);
   timeoutSelect.addEventListener('change', onTimeoutSelectChange);
 };
 
-export { initFormUserInputsModule, defaultInputs, resetSlider };
+export { initFormUserInputsModule, resetSlider, resetAddressInput };

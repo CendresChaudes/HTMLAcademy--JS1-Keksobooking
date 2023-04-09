@@ -109,12 +109,10 @@ const initMapModule = () => {
 
 const onGetDataSuccess = (data) => {
   initMapModule();
-  console.log(1);
   renderSimilarAdvertisementMarkers(data, markerGroup);
 };
 
 const onGetDataFail = () => {
-  console.log(2);
   createErrorMessage();
 };
 

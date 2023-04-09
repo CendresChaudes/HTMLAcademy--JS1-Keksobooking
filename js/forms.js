@@ -1,5 +1,5 @@
 import { addValidators, isValidForm } from './new-adv-form-validation.js';
-import { initFormUserInputsModule, defaultInputs, resetSlider } from './new-adv-form-inputs.js';
+import { initFormUserInputsModule, resetSlider, resetAddressInput } from './new-adv-form-inputs.js';
 import { renderSuccessMessage, renderErrorMessage } from './new-adv-form-messages.js';
 import { resetMap } from './map.js';
 import { sendData } from './data.js';
@@ -38,7 +38,7 @@ const activateForms = () => {
 const resetForms = () => {
   newAdvertisementForm.reset();
   filtersForm.reset();
-  defaultInputs();
+  resetAddressInput();
   resetSlider();
 };
 

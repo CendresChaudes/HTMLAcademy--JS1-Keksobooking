@@ -1,23 +1,14 @@
+const AdvertisementTypes = {
+  PALACE: 'Дворец',
+  FLAT: 'Квартира',
+  HOUSE: 'Дом',
+  BUNGALOW: 'Бунгало',
+  HOTEL: 'Отель',
+};
+
 const advertisementCardTemplate = document.querySelector('#card').content.querySelector('.popup');
 
 const getPriceInfo = (price) => price ? `${price} <span>₽/ночь</span>` : '';
-
-const getTypeInfo = (type) => {
-  switch (type) {
-    case 'palace':
-      return 'Дворец';
-    case 'flat':
-      return 'Квартира';
-    case 'house':
-      return 'Дом';
-    case 'bungalow':
-      return 'Бунгало';
-    case 'hotel':
-      return 'Отель';
-    default:
-      return '';
-  }
-};
 
 const getCapacityInfo = (rooms, guests) => {
   if (rooms !== 'undefined' && guests !== 'undefined') {
@@ -72,7 +63,7 @@ const createAdvertisementCard = ({author, offer}) => {
   advertisementCard.querySelector('.popup__title').textContent = offer.title ?? '';
   advertisementCard.querySelector('.popup__text--address').textContent = offer.address ?? '';
   advertisementCard.querySelector('.popup__text--price').innerHTML = getPriceInfo(offer.price);
-  advertisementCard.querySelector('.popup__type').textContent = getTypeInfo(offer.type);
+  advertisementCard.querySelector('.popup__type').textContent = AdvertisementTypes[offer.type.toUpperCase()] ?? '';
   advertisementCard.querySelector('.popup__text--capacity').textContent = getCapacityInfo(offer.rooms, offer.guests);
   advertisementCard.querySelector('.popup__text--time').textContent = getCheckinCheckoutInfo(offer.checkin, offer.checkout);
   advertisementCard.querySelector('.popup__description').textContent = offer.description ?? '';
