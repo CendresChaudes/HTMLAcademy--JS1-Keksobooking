@@ -1,6 +1,5 @@
 import { activateForms } from './forms.js';
 import { createAdvertisementCard } from './similar-advertisements.js';
-// import { createAdvertisementDataset } from './temp-data.js';
 
 const MAP_DEFAULT_SETUP = {
   lat: 35.67240,
@@ -26,23 +25,6 @@ const MarkerSetups = {
 };
 
 const addressInput = document.querySelector('#address');
-
-const map = L.map('map-canvas')
-  .on('load', activateForms)
-  .setView({
-    lat: MAP_DEFAULT_SETUP.lat,
-    lng: MAP_DEFAULT_SETUP.lng,
-  }, MAP_DEFAULT_SETUP.scale,);
-
-L.tileLayer(
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  {
-    attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors |
-      Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>`,
-  },
-).addTo(map);
-
-const markerGroup = L.layerGroup().addTo(map);
 
 const mainMarker = createMarker(MAP_DEFAULT_SETUP.lat, MAP_DEFAULT_SETUP.lng, MarkerSetups.MAIN.url, MarkerSetups.MAIN.isDraggable, MarkerSetups.MAIN.type);
 
@@ -88,13 +70,33 @@ function createMarker (lat, lng, url, isDraggable, type, item = null) {
   return marker;
 }
 
-const renderMainMarker = () => mainMarker.addTo(map);
+const renderMainMarker = (map) => mainMarker.addTo(map);
 
-renderMainMarker();
-
-const renderSimilarAdvertisementMarkers = (data) => {
+const renderSimilarAdvertisementMarkers = (data, layer) => {
   data.forEach((item) => createMarker(item.location.lat, item.location.lng, MarkerSetups.SIMILAR.url, MarkerSetups.SIMILAR.isDraggable, MarkerSetups.SIMILAR.type, item)
-    .addTo(map));
+    .addTo(layer));
 };
 
-export { resetMainMarker };
+const initMapModule = () => {
+  const map = L.map('map-canvas')
+    .on('load', activateForms)
+    .setView({
+      lat: MAP_DEFAULT_SETUP.lat,
+      lng: MAP_DEFAULT_SETUP.lng,
+    }, MAP_DEFAULT_SETUP.scale);
+
+  L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+      attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors |
+      Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>`,
+    },
+  ).addTo(map);
+
+  const markerGroup = L.layerGroup().addTo(map);
+
+  renderMainMarker(map);
+  // renderSimilarAdvertisementMarkers(data, markerGroup);
+};
+
+export { initMapModule, resetMainMarker };
