@@ -1,5 +1,4 @@
 import { initFormsModule } from './forms.js';
-import { initMap } from './map.js';
+import './map.js';
 
 initFormsModule();
-initMap();

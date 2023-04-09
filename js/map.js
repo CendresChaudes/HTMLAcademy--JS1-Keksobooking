@@ -1,6 +1,6 @@
 import { activateForms } from './forms.js';
 import { createAdvertisementCard } from './similar-advertisements.js';
-import { createAdvertisementDataset } from './temp-data.js';
+// import { createAdvertisementDataset } from './temp-data.js';
 
 const MAP_DEFAULT_SETUP = {
   lat: 35.67240,
@@ -27,9 +27,33 @@ const MarkerSetups = {
 
 const addressInput = document.querySelector('#address');
 
-const advertisementDataset = createAdvertisementDataset();
+const map = L.map('map-canvas')
+  .on('load', activateForms)
+  .setView({
+    lat: MAP_DEFAULT_SETUP.lat,
+    lng: MAP_DEFAULT_SETUP.lng,
+  }, MAP_DEFAULT_SETUP.scale,);
 
-const createPin = (url, type) => {
+L.tileLayer(
+  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  {
+    attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors |
+      Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>`,
+  },
+).addTo(map);
+
+const markerGroup = L.layerGroup().addTo(map);
+
+const mainMarker = createMarker(MAP_DEFAULT_SETUP.lat, MAP_DEFAULT_SETUP.lng, MarkerSetups.MAIN.url, MarkerSetups.MAIN.isDraggable, MarkerSetups.MAIN.type);
+
+const resetMainMarker = () => {
+  mainMarker.setLatLng({
+    lat: MAP_DEFAULT_SETUP.lat,
+    lng: MAP_DEFAULT_SETUP.lng,
+  });
+};
+
+function createPin (url, type) {
   const pin = L.icon({
     iconUrl: url,
     iconSize: [MarkerSetups[type].size, MarkerSetups[type].size],
@@ -37,9 +61,9 @@ const createPin = (url, type) => {
   });
 
   return pin;
-};
+}
 
-const createMarker = (lat, lng, url, isDraggable, type, item = null) => {
+function createMarker (lat, lng, url, isDraggable, type, item = null) {
   const marker = L.marker(
     {
       lat,
@@ -62,35 +86,15 @@ const createMarker = (lat, lng, url, isDraggable, type, item = null) => {
   }
 
   return marker;
-};
+}
 
-const renderMainMarker = (lat, lng, url, isDraggable, type, layer) => createMarker(lat, lng, url, isDraggable, type).addTo(layer);
+const renderMainMarker = () => mainMarker.addTo(map);
 
-const renderSimilarAdvertisementMarkers = (data, layer) => {
+renderMainMarker();
+
+const renderSimilarAdvertisementMarkers = (data) => {
   data.forEach((item) => createMarker(item.location.lat, item.location.lng, MarkerSetups.SIMILAR.url, MarkerSetups.SIMILAR.isDraggable, MarkerSetups.SIMILAR.type, item)
-    .addTo(layer));
+    .addTo(map));
 };
 
-const initMap = () => {
-  const map = L.map('map-canvas')
-    .on('load', activateForms)
-    .setView({
-      lat: MAP_DEFAULT_SETUP.lat,
-      lng: MAP_DEFAULT_SETUP.lng,
-    }, MAP_DEFAULT_SETUP.scale,);
-
-  L.tileLayer(
-    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    {
-      attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors |
-      Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>`,
-    },
-  ).addTo(map);
-
-  const markerGroup = L.layerGroup().addTo(map);
-
-  renderMainMarker(MAP_DEFAULT_SETUP.lat, MAP_DEFAULT_SETUP.lng, MarkerSetups.MAIN.url, MarkerSetups.MAIN.isDraggable, MarkerSetups.MAIN.type, map);
-  renderSimilarAdvertisementMarkers(advertisementDataset, markerGroup);
-};
-
-export { initMap };
+export { };
