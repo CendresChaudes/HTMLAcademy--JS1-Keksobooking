@@ -1,5 +1,5 @@
 import { initFormsModule } from './forms.js';
-import { initMapModule } from './map.js';
+import { getAdvertisementsData } from './map.js';
 
 initFormsModule();
-initMapModule();
+getAdvertisementsData();

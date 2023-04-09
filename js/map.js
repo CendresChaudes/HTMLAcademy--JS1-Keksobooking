@@ -1,5 +1,7 @@
+import { getData } from './data.js';
 import { activateForms } from './forms.js';
 import { createAdvertisementCard } from './similar-advertisements.js';
+import { createErrorMessage } from './map-message.js';
 
 const MAP_DEFAULT_SETUP = {
   lat: 35.67240,
@@ -8,6 +10,7 @@ const MAP_DEFAULT_SETUP = {
 };
 
 const COORDINATES_PRECISION = 5;
+const GET_DATA_URL = 'https://27.javascript.pages.academy/keksobooking/data';
 
 const MarkerSetups = {
   MAIN: {
@@ -102,7 +105,19 @@ const initMapModule = () => {
   ).addTo(map);
 
   renderMainMarker(map);
-  // renderSimilarAdvertisementMarkers(data, markerGroup);
 };
 
-export { initMapModule, resetMap };
+const onGetDataSuccess = (data) => {
+  initMapModule();
+  console.log(1);
+  renderSimilarAdvertisementMarkers(data, markerGroup);
+};
+
+const onGetDataFail = () => {
+  console.log(2);
+  createErrorMessage();
+};
+
+const getAdvertisementsData = () => getData(GET_DATA_URL, onGetDataSuccess, onGetDataFail);
+
+export { getAdvertisementsData, resetMap };
