@@ -59,10 +59,10 @@ const onNewAdvertisementFormSubmit = (evt) => {
   }
 };
 
-function onNewAdvertisementFormReset() {
+const onNewAdvertisementFormReset = () => {
   resetForms();
   resetMap();
-}
+};
 
 const initFormsModule = () => {
   newAdvertisementForm.addEventListener('submit', onNewAdvertisementFormSubmit);
