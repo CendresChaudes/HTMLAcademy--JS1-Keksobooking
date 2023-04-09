@@ -26,13 +26,22 @@ const MarkerSetups = {
 
 const addressInput = document.querySelector('#address');
 
+const map = L.map('map-canvas');
+const markerGroup = L.layerGroup().addTo(map);
 const mainMarker = createMarker(MAP_DEFAULT_SETUP.lat, MAP_DEFAULT_SETUP.lng, MarkerSetups.MAIN.url, MarkerSetups.MAIN.isDraggable, MarkerSetups.MAIN.type);
 
-const resetMainMarker = () => {
+const resetMap = () => {
   mainMarker.setLatLng({
     lat: MAP_DEFAULT_SETUP.lat,
     lng: MAP_DEFAULT_SETUP.lng,
   });
+
+  map.setView({
+    lat: MAP_DEFAULT_SETUP.lat,
+    lng: MAP_DEFAULT_SETUP.lng,
+  }, MAP_DEFAULT_SETUP.scale);
+
+  map.closePopup();
 };
 
 function createPin (url, type) {
@@ -70,7 +79,7 @@ function createMarker (lat, lng, url, isDraggable, type, item = null) {
   return marker;
 }
 
-const renderMainMarker = (map) => mainMarker.addTo(map);
+const renderMainMarker = () => mainMarker.addTo(map);
 
 const renderSimilarAdvertisementMarkers = (data, layer) => {
   data.forEach((item) => createMarker(item.location.lat, item.location.lng, MarkerSetups.SIMILAR.url, MarkerSetups.SIMILAR.isDraggable, MarkerSetups.SIMILAR.type, item)
@@ -78,8 +87,7 @@ const renderSimilarAdvertisementMarkers = (data, layer) => {
 };
 
 const initMapModule = () => {
-  const map = L.map('map-canvas')
-    .on('load', activateForms)
+  map.on('load', activateForms)
     .setView({
       lat: MAP_DEFAULT_SETUP.lat,
       lng: MAP_DEFAULT_SETUP.lng,
@@ -93,10 +101,8 @@ const initMapModule = () => {
     },
   ).addTo(map);
 
-  const markerGroup = L.layerGroup().addTo(map);
-
   renderMainMarker(map);
   // renderSimilarAdvertisementMarkers(data, markerGroup);
 };
 
-export { initMapModule, resetMainMarker };
+export { initMapModule, resetMap };
