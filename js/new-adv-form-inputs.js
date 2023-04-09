@@ -1,4 +1,5 @@
 const NUMBER_SYSTEM = 10;
+const COORDINATES_PRECISION = 5;
 
 const MAP_DEFAULT_SETUP = {
   lat: 35.67240,
@@ -57,9 +58,13 @@ const initSLider = () => {
   priceSlider.noUiSlider.on('update', () => {
     priceInput.value = priceSlider.noUiSlider.get();
   });
-  priceInput.value = '';
 
   priceInput.addEventListener('change', onPriceInputChange);
+};
+
+const resetSlider = () => {
+  priceSlider.noUiSlider.set(0);
+  priceInput.value = '';
 };
 
 const defaultInputs = () => {
@@ -67,12 +72,13 @@ const defaultInputs = () => {
   guestsCountSelect.querySelector(`[value="${selectedRoomsCountValue}"]`).selected = 'selected';
 
   priceInput.placeholder = MinPriceTypeValues[typeSelect.value.toUpperCase()];
+  addressInput.defaultValue = `${MAP_DEFAULT_SETUP.lat.toFixed(COORDINATES_PRECISION)}, ${MAP_DEFAULT_SETUP.lng.toFixed(COORDINATES_PRECISION)}`;
 };
 
 const onTypeSelectChange = (evt) => {
   priceSlider.noUiSlider.set(DefaultSliderValues.MIN);
   priceInput.placeholder = MinPriceTypeValues[evt.target.value.toUpperCase()];
-  priceInput.value = 'undefined';
+  priceInput.value = '';
 };
 
 const onTimeinSelectChange = (evt) => {
@@ -86,12 +92,11 @@ const onTimeoutSelectChange = (evt) => {
 const initFormUserInputsModule = () => {
   defaultInputs();
   initSLider();
+  resetSlider();
 
   typeSelect.addEventListener('change', onTypeSelectChange);
   timeinSelect.addEventListener('change', onTimeinSelectChange);
   timeoutSelect.addEventListener('change', onTimeoutSelectChange);
-
-  addressInput.value = `${MAP_DEFAULT_SETUP.lat}, ${MAP_DEFAULT_SETUP.lng}`;
 };
 
-export { initFormUserInputsModule };
+export { initFormUserInputsModule, defaultInputs, resetSlider };
