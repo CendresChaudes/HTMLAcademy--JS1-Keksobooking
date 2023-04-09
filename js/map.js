@@ -97,4 +97,4 @@ const renderSimilarAdvertisementMarkers = (data) => {
     .addTo(map));
 };
 
-export { };
+export { resetMainMarker };
