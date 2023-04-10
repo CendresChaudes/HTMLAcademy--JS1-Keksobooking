@@ -18,13 +18,13 @@ const DATA_RANGE_END = 10;
 const MarkerSetups = {
   MAIN: {
     size: 52,
-    url: '../img/main-pin.svg',
+    url: './img/main-pin.svg',
     isDraggable: true,
     type: 'MAIN'
   },
   SIMILAR: {
     size: 40,
-    url: '../img/pin.svg',
+    url: './img/pin.svg',
     isDraggable: false,
     type: 'SIMILAR'
   }
