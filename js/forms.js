@@ -1,4 +1,4 @@
-import { addValidators, isValidForm } from './new-adv-form-validation.js';
+import { addValidators, isValidForm, resetPristine } from './new-adv-form-validation.js';
 import { initFormUserInputsModule, resetSlider, resetAddressInput } from './new-adv-form-inputs.js';
 import { renderSuccessMessage, renderErrorMessage } from './new-adv-form-messages.js';
 import { resetMap } from './map.js';
@@ -47,6 +47,7 @@ const resetForms = () => {
   filtersForm.reset();
   resetAddressInput();
   resetSlider();
+  resetPristine();
 };
 
 const onSendDataSuccess = () => {

@@ -66,5 +66,6 @@ const addValidators = () => {
 };
 
 const isValidForm = () => pristineSetup.validate();
+const resetPristine = () => pristineSetup.reset();
 
-export { addValidators, isValidForm };
+export { addValidators, isValidForm, resetPristine };
