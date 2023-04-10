@@ -5,9 +5,14 @@ import { resetMap } from './map.js';
 import { sendData } from './data.js';
 
 const SEND_DATA_URL = 'https://27.javascript.pages.academy/keksobooking';
+const DEFAULT_AVATAR_ICON_SRC = 'img/muffin-grey.svg';
 
 const newAdvertisementForm = document.querySelector('.ad-form');
 const filtersForm = document.querySelector('.map__filters');
+const avatarUploadInput = document.querySelector('#avatar');
+const avatarUploadPreview = document.querySelector('.ad-form-header__preview img');
+const photoUploadInput = document.querySelector('#images');
+const photoUploadPreview = document.querySelector('.ad-form__photo img');
 
 const deactivateFormElements = (form) => Array.from(form.elements).forEach((element) => {
   if (element.tagName !== 'FIELDSET') {
@@ -36,6 +41,8 @@ const activateForms = () => {
 };
 
 const resetForms = () => {
+  avatarUploadPreview.src = DEFAULT_AVATAR_ICON_SRC;
+  photoUploadPreview.hidden = true;
   newAdvertisementForm.reset();
   filtersForm.reset();
   resetAddressInput();
@@ -64,9 +71,20 @@ const onNewAdvertisementFormReset = () => {
   resetMap();
 };
 
+const onAvatarUploadInputChange = () => {
+  avatarUploadPreview.src = URL.createObjectURL(avatarUploadInput.files[0]);
+};
+
+const onPhotoUploadInputChange = () => {
+  photoUploadPreview.src = URL.createObjectURL(photoUploadInput.files[0]);
+  photoUploadPreview.hidden = false;
+};
+
 const initFormsModule = () => {
   newAdvertisementForm.addEventListener('submit', onNewAdvertisementFormSubmit);
   newAdvertisementForm.addEventListener('reset', onNewAdvertisementFormReset);
+  avatarUploadInput.addEventListener('change', onAvatarUploadInputChange);
+  photoUploadInput.addEventListener('change', onPhotoUploadInputChange);
   deactivateForms();
   addValidators();
   initFormUserInputsModule();
