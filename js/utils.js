@@ -4,4 +4,13 @@ const getRandomFloat = (min, max, precision) => +(Math.random() * (max - min) + 
 
 const checkStringMinLength = (string, length) => String(string).length >= length;
 
-export { getRandomInteger, getRandomFloat, checkStringMinLength };
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export { getRandomInteger, getRandomFloat, checkStringMinLength, debounce };
