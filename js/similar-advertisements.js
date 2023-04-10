@@ -10,9 +10,21 @@ const advertisementCardTemplate = document.querySelector('#card').content.queryS
 
 const getPriceInfo = (price) => price ? `${price} <span>₽/ночь</span>` : '';
 
+const getRoomsWord = (rooms) => {
+  if (rooms % 10 === 1) {
+    return 'комната';
+  } else if (rooms % 10 === 2 || rooms % 10 === 3 || rooms % 10 === 4) {
+    return 'комнаты';
+  } else {
+    return 'комнат';
+  }
+};
+
+const getGuestsWord = (guests) => guests % 10 === 1 ? 'гостя' : 'гостей';
+
 const getCapacityInfo = (rooms, guests) => {
   if (rooms !== 'undefined' && guests !== 'undefined') {
-    return `${rooms} комнаты для ${guests} гостей`;
+    return `${rooms} ${getRoomsWord(rooms)} для ${guests} ${getGuestsWord(guests)}`;
   }
 
   return '';
