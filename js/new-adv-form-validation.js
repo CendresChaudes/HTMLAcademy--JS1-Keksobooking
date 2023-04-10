@@ -20,9 +20,9 @@ const guestsCountSelect = document.querySelector('#capacity');
 const newAdvertisementForm = document.querySelector('.ad-form');
 
 const pristineSetup = new Pristine(newAdvertisementForm, {
-  classTo: 'validate',
+  classTo: 'ad-form__element',
   errorClass: 'ad-form__element--invalid',
-  errorTextParent: 'validate',
+  errorTextParent: 'ad-form__element',
   errorTextTag: 'p'
 }, false);
 
