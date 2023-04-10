@@ -2,6 +2,7 @@ import { getData } from './data.js';
 import { activateForms } from './forms.js';
 import { createAdvertisementCard } from './similar-advertisements.js';
 import { createErrorMessage } from './map-message.js';
+import { initFilters } from './map-filters.js';
 
 const MAP_DEFAULT_SETUP = {
   lat: 35.67240,
@@ -11,6 +12,8 @@ const MAP_DEFAULT_SETUP = {
 
 const COORDINATES_PRECISION = 5;
 const GET_DATA_URL = 'https://27.javascript.pages.academy/keksobooking/data';
+const DATA_RANGE_START = 0;
+const DATA_RANGE_END = 10;
 
 const MarkerSetups = {
   MAIN: {
@@ -84,12 +87,14 @@ function createMarker (lat, lng, url, isDraggable, type, item = null) {
 
 const renderMainMarker = () => mainMarker.addTo(map);
 
-const renderSimilarAdvertisementMarkers = (data, layer) => {
+const renderSimilarAdvertisementMarkers = (data) => {
   data.forEach((item) => createMarker(item.location.lat, item.location.lng, MarkerSetups.SIMILAR.url, MarkerSetups.SIMILAR.isDraggable, MarkerSetups.SIMILAR.type, item)
-    .addTo(layer));
+    .addTo(markerGroup));
 };
 
-const initMapModule = () => {
+const clearSimilarAdvertisementMarkers = () => markerGroup.clearLayers();
+
+const initMapModule = (data) => {
   map.on('load', activateForms)
     .setView({
       lat: MAP_DEFAULT_SETUP.lat,
@@ -105,11 +110,12 @@ const initMapModule = () => {
   ).addTo(map);
 
   renderMainMarker(map);
+  renderSimilarAdvertisementMarkers(data.slice(DATA_RANGE_START, DATA_RANGE_END));
 };
 
 const onGetDataSuccess = (data) => {
-  initMapModule();
-  renderSimilarAdvertisementMarkers(data, markerGroup);
+  initMapModule(data);
+  initFilters(data);
 };
 
 const onGetDataFail = () => {
@@ -118,4 +124,4 @@ const onGetDataFail = () => {
 
 const getAdvertisementsData = () => getData(GET_DATA_URL, onGetDataSuccess, onGetDataFail);
 
-export { getAdvertisementsData, resetMap };
+export { getAdvertisementsData, resetMap, renderSimilarAdvertisementMarkers, clearSimilarAdvertisementMarkers };
