@@ -65,8 +65,9 @@ const resetSlider = () => {
   priceInput.value = '';
 };
 
-const resetAddressInput = () => {
+const setDefaultInputValues = () => {
   addressInput.defaultValue = `${MAP_DEFAULT_SETUP.lat.toFixed(COORDINATES_PRECISION)}, ${MAP_DEFAULT_SETUP.lng.toFixed(COORDINATES_PRECISION)}`;
+  priceInput.placeholder = MinPriceTypeValues[typeSelect.querySelector('[selected]').value.toUpperCase()];
 };
 
 const onTypeSelectChange = (evt) => {
@@ -86,11 +87,11 @@ const onTimeoutSelectChange = (evt) => {
 const initFormUserInputsModule = () => {
   initSLider();
   resetSlider();
-  resetAddressInput();
+  setDefaultInputValues();
 
   typeSelect.addEventListener('change', onTypeSelectChange);
   timeinSelect.addEventListener('change', onTimeinSelectChange);
   timeoutSelect.addEventListener('change', onTimeoutSelectChange);
 };
 
-export { initFormUserInputsModule, resetSlider, resetAddressInput };
+export { initFormUserInputsModule, resetSlider, setDefaultInputValues };

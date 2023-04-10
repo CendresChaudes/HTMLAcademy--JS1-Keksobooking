@@ -1,5 +1,5 @@
 import { addValidators, isValidForm, resetPristine } from './new-adv-form-validation.js';
-import { initFormUserInputsModule, resetSlider, resetAddressInput } from './new-adv-form-inputs.js';
+import { initFormUserInputsModule, resetSlider, setDefaultInputValues } from './new-adv-form-inputs.js';
 import { renderSuccessMessage, renderErrorMessage } from './new-adv-form-messages.js';
 import { resetMap } from './map.js';
 import { sendData } from './data.js';
@@ -45,7 +45,7 @@ const resetForms = () => {
   photoUploadPreview.hidden = true;
   newAdvertisementForm.reset();
   filtersForm.reset();
-  resetAddressInput();
+  setDefaultInputValues();
   resetSlider();
   resetPristine();
 };
