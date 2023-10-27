@@ -12,4 +12,4 @@
 
 ---
 
-Ссылка на проект: https://cendreschaudes.github.io/HTMLAcademy__JS1-Keksobooking/
+Ссылка на деплой: https://cendreschaudes.github.io/HTMLAcademy__JS1-Keksobooking/
